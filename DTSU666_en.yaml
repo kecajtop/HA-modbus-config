@@ -1,0 +1,214 @@
+modbus:
+  - name: rs485
+    type: serial
+    method: rtu
+    port: /dev/ttyUSB0
+    baudrate: 9600
+    stopbits: 1
+    bytesize: 8
+    parity: N
+    delay: 1
+    timeout: 1
+    sensors:
+### ADR 01
+#------------------------------------------------------
+# Power 
+# ------------------------------------------------------
+      - name: "DTSU Total Power Imported kwh"
+        slave: 01
+        address: 0x101E
+        input_type: holding
+        count: 2
+        precision: 2
+        data_type: float32
+        unit_of_measurement: kWh
+        device_class: energy
+        scan_interval: 120
+
+      - name: "DTSU Total Power Exported kwh"
+        slave: 01
+        address: 0x1028
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 2
+        scan_interval: 120
+#------------------------------------------------------
+# Voltages 
+#------------------------------------------------------
+      - name: "DTSU Voltage L3"
+        slave: 01
+        address: 0x200A
+        unit_of_measurement: V
+        device_class: voltage
+        scale: 0.1
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 1
+
+      - name: "DTSU Voltage L2"
+        slave: 01
+        address: 0x2008
+        unit_of_measurement: V
+        device_class: voltage
+        scale: 0.1
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 1  
+
+      - name: "DTSU Voltage L1"
+        slave: 01
+        address: 0x2006
+        unit_of_measurement: V
+        device_class: voltage
+        scale: 0.1
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 1
+#------------------------------------------------------
+# Currents 
+#------------------------------------------------------      
+
+      - name: "DTSU Current L3"
+        slave: 01
+        address: 0x2010
+        unit_of_measurement: A
+        device_class: current
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 3
+        scale: -0.001 
+  
+
+      - name: "DTSU Current L2"
+        slave: 01
+        address: 0x200E
+        unit_of_measurement: A
+        device_class: current
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 3
+        scale: -0.001  
+
+
+      - name: "DTSU Current L1"
+        slave: 01
+        address: 0x200C
+        unit_of_measurement: A
+        device_class: current
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 3
+        scale: -0.001
+
+ #------------------------------------------------------
+ # Moc chwilowa 
+ #------------------------------------------------------
+
+      - name: "DTSU Power Total"
+        slave: 01
+        address: 0x2012
+        unit_of_measurement: W
+        device_class: power
+        scale: -0.1
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 1 
+
+
+      - name: "DTSU Power L3"
+        slave: 01
+        address: 0x2018
+        unit_of_measurement: W
+        device_class: power
+        scale: -0.1
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 1 
+
+      - name: "DTSU Power L2"
+        slave: 01
+        address: 0x2016
+        unit_of_measurement: W
+        device_class: power
+        scale: -0.1
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 1 
+
+      - name: "DTSU Power L1"
+        slave: 01
+        address: 0x2014
+        unit_of_measurement: W
+        device_class: power
+        scale: -0.1
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 1 
+#------------------------------------------------------
+# Power factor
+#------------------------------------------------------
+
+      - name: "DTSU Power Factor"
+        slave: 01
+        address: 0x202A
+        unit_of_measurement: Pf
+        device_class: power_factor
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 1
+        scale: 0.001
+        scan_interval: 60
+
+
+      - name: "DTSU Power Factor L1"
+        slave: 01
+        address: 0x202c
+        unit_of_measurement: Pf
+        device_class: power_factor
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 1
+        scale: 0.001
+        scan_interval: 60
+      
+
+      - name: "DTSU Power Factor L2"
+        slave: 01
+        address: 0x202e
+        unit_of_measurement: Pf
+        device_class: power_factor
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 1
+        scale: 0.001
+        scan_interval: 60
+
+
+      - name: "DTSU Power Factor L3"
+        slave: 01
+        address: 0x2030
+        unit_of_measurement: Pf
+        device_class: power_factor
+        input_type: holding
+        data_type: float32
+        count: 2
+        precision: 1
+        scale: 0.001
+        scan_interval: 60
